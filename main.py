@@ -20,7 +20,8 @@ def main():
         fabric_name: None,
         "SPINES": None,
         "L3_LEAFS": None,
-        "L2_LEAFS": None
+        "L2_LEAFS": None,
+        "TENANTS":None
         },
     "dc-fabric-deploy-cvp": None,
     "dc-fabric-post-validation": None,
@@ -43,6 +44,7 @@ git+https://github.com/batfish/pybatfish.git'''
     avd["group_vars"]["SPINES"] = generateGroupVarsSpines(file_location)
     avd["group_vars"]["L3_LEAFS"] = generateGroupVarsL3Leafs(file_location)
     avd["group_vars"]["L2_LEAFS"] = generateGroupVarsL2Leafs(file_location)
+    avd["group_vars"]["TENANT_NETWORKS"] = generateGroupVarsTenants(file_location)
 
     #Create avd directory
     if not os.path.exists("./avd"):
@@ -92,8 +94,9 @@ git+https://github.com/batfish/pybatfish.git'''
             gvfile.write(yaml.dump(v))
 
     #!!!!Hard-code tenants for now!!!!
-    with open("./avd/group_vars/TENANT_NETWORKS.yml", 'w') as tenants:
-        tenants.write(generateGroupVarsTenants(file_location))
+    # from generators.generateGroupVarsTenants import tenants_yaml
+    # with open("./avd/group_vars/TENANT_NETWORKS.yml", 'w') as tenants:
+    #     # tenants.write(tenants_yaml)
     #!!!Hard-code servers for now!!!
     with open("./avd/group_vars/SERVERS.yml", 'w') as tenants:
         tenants.write('port_profiles: []\nservers: []')
