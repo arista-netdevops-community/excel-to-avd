@@ -10,8 +10,18 @@ from generators.generateGroupVarsL2Leafs import generateGroupVarsL2Leafs
 from generators.generateGroupVarsTenants import generateGroupVarsTenants
 from generators.generateGroupVarsServers import generateGroupVarsServers
 
+import argparse
+
 def main():
-    file_location = "PotentialAnsibleCSVTemplate.xlsx"
+    parser = argparse.ArgumentParser(
+        description='Creates necessary files to run Arista AVD ansible playbook')
+    parser.add_argument('-f', '--file', help="path to Excel file")
+    args = parser.parse_args()
+
+    file_location = args.file
+    if file_location is None:
+        print("Please specify a path for the Excel file by using -f. Enter 'python main.py -h' for more details.")
+        return
     fabric_name = getFabricName(file_location)
     avd = {
     "inventory": None,
@@ -83,7 +93,6 @@ git+https://github.com/batfish/pybatfish.git'''
     if not os.path.exists("./avd/documentation/devices"):
         os.makedirs("./avd/documentation/devices")
 
-
     #Create inventory file
     with open("./avd/inventory.yml", "w") as inv:
         inv.write(yaml.dump(avd["inventory"]))
@@ -95,14 +104,6 @@ git+https://github.com/batfish/pybatfish.git'''
         path = "./avd/group_vars/{}.yml".format(k)
         with open(path, "w") as gvfile:
             gvfile.write(yaml.dump(v))
-
-    #!!!!Hard-code tenants for now!!!!
-    # from generators.generateGroupVarsTenants import tenants_yaml
-    # with open("./avd/group_vars/TENANT_NETWORKS.yml", 'w') as tenants:
-    #     # tenants.write(tenants_yaml)
-    #!!!Hard-code servers for now!!!
-    # with open("./avd/group_vars/SERVERS.yml", 'w') as tenants:
-    #     tenants.write('port_profiles: []\nservers: []')
 
     #Create ansible config file
     from ansible_config import ansible_config
