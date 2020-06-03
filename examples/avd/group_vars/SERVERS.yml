@@ -1,0 +1,107 @@
+port_profiles:
+  TENANT_A:
+    mode: trunk
+    vlans: '110'
+  TENANT_A_B:
+    mode: trunk
+    vlans: 110-111,210-211
+  TENANT_B:
+    mode: trunk
+    vlans: 210-211
+servers:
+  server01:
+    adapters:
+    - profile: TENANT_A
+      server_ports:
+      - Eth1
+      switch_ports:
+      - Ethernet5
+      switches:
+      - DC1-LEAF1A
+    - port_channel:
+        description: PortChannel1
+        mode: active
+        state: present
+      profile: TENANT_A
+      server_ports:
+      - Eth4
+      - Eth5
+      switch_ports:
+      - Ethernet7
+      - Ethernet8
+      switches:
+      - DC1-LEAF1A
+      - DC1-LEAF1A
+    - port_channel:
+        description: PortChannel1
+        mode: active
+        state: present
+      profile: TENANT_B
+      server_ports:
+      - Eth2
+      - Eth3
+      switch_ports:
+      - Ethernet10
+      - Ethernet10
+      switches:
+      - DC1-LEAF2A
+      - DC1-LEAF2B
+    rack: RackB
+  server02:
+    adapters:
+    - profile: TENANT_A
+      server_ports:
+      - Eth1
+      switch_ports:
+      - Ethernet6
+      switches:
+      - DC1-LEAF1A
+    - port_channel:
+        description: PortChannel1
+        mode: active
+        state: present
+      profile: TENANT_B
+      server_ports:
+      - Eth2
+      - Eth3
+      switch_ports:
+      - Ethernet11
+      - Ethernet11
+      switches:
+      - DC1-LEAF2A
+      - DC1-LEAF2B
+    rack: RackB
+  server03:
+    adapters:
+    - port_channel:
+        description: PortChannel1
+        mode: active
+        state: present
+      profile: TENANT_A_B
+      server_ports:
+      - Eth1
+      - Eth2
+      switch_ports:
+      - Ethernet10
+      - Ethernet10
+      switches:
+      - DC1-SVC3A
+      - DC1-SVC3B
+    rack: RackC
+  server04:
+    adapters:
+    - port_channel:
+        description: PortChannel1
+        mode: active
+        state: present
+      profile: TENANT_A_B
+      server_ports:
+      - Eth1
+      - Eth2
+      switch_ports:
+      - Ethernet11
+      - Ethernet11
+      switches:
+      - DC1-SVC3A
+      - DC1-SVC3B
+    rack: RackC

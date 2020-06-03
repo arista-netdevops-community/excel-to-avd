@@ -1,0 +1,60 @@
+all:
+  children:
+    CVP:
+      hosts:
+        cvp_primary:
+          ansible_host: 10.20.30.181
+          ansible_httpapi_host: 10.20.30.181
+    DC2-Fabric:
+      children:
+        L2_LEAFS:
+          children:
+            DC1_L2LEAF1:
+              hosts:
+                DC1-L2LEAF1A:
+                  ansible_host: 192.168.200.112
+            DC1_L2LEAF2:
+              hosts:
+                DC1-L2LEAF2A:
+                  ansible_host: 192.168.200.113
+                DC1-L2LEAF2B:
+                  ansible_host: 192.168.200.114
+        L3_LEAFS:
+          children:
+            DC1_LEAF1:
+              hosts:
+                DC1-LEAF1A:
+                  ansible_host: 192.168.200.105
+            DC1_LEAF2:
+              hosts:
+                DC1-LEAF2A:
+                  ansible_host: 192.168.200.106
+                DC1-LEAF2B:
+                  ansible_host: 192.168.200.107
+            DC1_SVC3:
+              hosts:
+                DC1-SVC3A:
+                  ansible_host: 192.168.200.108
+                DC1-SVC3B:
+                  ansible_host: 192.168.200.109
+        SPINES:
+          hosts:
+            DC1-SPINE1:
+              ansible_host: 192.168.200.101
+            DC1-SPINE2:
+              ansible_host: 192.168.200.102
+        vars:
+          ansible_become: 'yes'
+          ansible_become_method: enable
+          ansible_connection: httpapi
+          ansible_httpapi_use_ssl: true
+          ansible_httpapi_validate_certs: false
+          ansible_network_os: eos
+    SERVERS:
+      children:
+        L2_LEAFS: null
+        L3_LEAFS: null
+    TENANT_NETWORKS:
+      children:
+        L2_LEAFS: null
+        L3_LEAFS: null

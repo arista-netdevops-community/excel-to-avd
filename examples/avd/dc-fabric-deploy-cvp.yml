@@ -1,0 +1,28 @@
+---
+- name: Build Switch configuration
+  hosts: DC2-Fabric
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: generate intented variables
+      tags: [build]
+      import_role:
+         name: arista.avd.eos_l3ls_evpn
+    - name: generate device intended config and documention
+      tags: [build]
+      import_role:
+         name: arista.avd.eos_cli_config_gen
+
+- name: Configuration deployment with CVP
+  hosts: CVP
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: run CVP provisioning
+      import_role:
+         name: arista.avd.eos_config_deploy_cvp
+      vars:
+        container_root: 'DC2-Fabric'
+        configlets_prefix: 'DC2_AVD'
+        device_filter: 'DC2'
+        state: present

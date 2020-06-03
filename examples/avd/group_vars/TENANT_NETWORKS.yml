@@ -1,0 +1,115 @@
+tenants:
+  Tenant_A:
+    mac_vrf_vni_base: 10000
+    vrfs:
+      Tenant_A_APP_Zone:
+        svis:
+          130:
+            enabled: 1
+            ip_subnet: 10.1.30.1/24
+            name: Tenant_A_APP_Zone_1
+            tags:
+            - app
+            - erp1
+          131:
+            enabled: 1
+            ip_subnet: 10.1.31.1/24
+            name: Tenant_A_APP_Zone_2
+            tags:
+            - app
+        vrf_vni: 12
+      Tenant_A_DB_Zone:
+        svis:
+          140:
+            enabled: 1
+            ip_subnet: 10.1.40.1/24
+            name: Tenant_A_DB_Zone_1
+            tags:
+            - db
+          141:
+            enabled: 1
+            ip_subnet: 10.1.41.1/24
+            name: Tenant_A_DB_Zone_2
+            tags:
+            - db
+        vrf_vni: 13
+      Tenant_A_OP_Zone:
+        svis:
+          110:
+            enabled: 1
+            ip_subnet: 10.1.10.1/24
+            name: Tenant_A_OP_Zone_1
+            tags:
+            - opzone
+          111:
+            enabled: 1
+            ip_subnet: 10.1.11.1/24
+            name: Tenant_A_OP_Zone_2
+            tags:
+            - opzone
+            vni_override: 50111
+        vrf_vni: 10
+      Tenant_A_WAN_Zone:
+        svis:
+          150:
+            enabled: 1
+            ip_subnet: 10.1.50.1/24
+            name: Tenant_A_WAN_Zone_1
+            tags:
+            - wan
+        vrf_vni: 14
+      Tenant_A_WEB_Zone:
+        svis:
+          120:
+            enabled: 1
+            ip_subnet: 10.1.20.1/24
+            name: Tenant_A_WEB_Zone_1
+            tags:
+            - web
+            - erp1
+          121:
+            enabled: 1
+            ip_subnet: 10.1.21.1/24
+            name: Tenant_A_WEB_Zone_2
+            tags:
+            - web
+        vrf_vni: 11
+  Tenant_B:
+    mac_vrf_vni_base: 20000
+    vrfs:
+      Tenant_B_OP_Zone:
+        svis:
+          210:
+            enabled: 1
+            ip_subnet: 10.2.10.1/24
+            name: Tenant_B_OP_Zone_1
+            tags:
+            - opzone
+          211:
+            enabled: 1
+            ip_subnet: 10.2.11.1/24
+            name: Tenant_B_OP_Zone_2
+            tags:
+            - opzone
+        vrf_vni: 20
+      Tenant_B_WAN_Zone:
+        svis:
+          250:
+            enabled: 1
+            ip_subnet: 10.2.50.1/24
+            name: Tenant_B_WAN_Zone_1
+            tags:
+            - wan
+        vrf_vni: 21
+  Tenant_C:
+    mac_vrf_vni_base: 30000
+    vrfs:
+      Tenant_C_OP_Zone:
+        svis:
+          310:
+            enabled: 1
+            ip_subnet: 10.3.10.1/24
+            name: Tenant_C_OP_Zone_1
+            tags:
+            - opzone
+        vrf_vni: 30
