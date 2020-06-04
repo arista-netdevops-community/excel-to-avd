@@ -2,15 +2,18 @@ import xlrd
 import json, yaml, re
 from collections import OrderedDict
 
+keys_that_are_lists = ["MLAG Interfaces", "Spines", "Uplink Interfaces to Spines", "Uplink Interfaces to L3 Leafs",
+"L3 Leaf Interfaces"]
+
 def convertToBoolIfNeeded(variable):
     if type(variable) == str and re.match(r'(?i)(True|False)', variable.strip()):
         variable = True if re.match(r'(?i)true', variable.strip()) else False
     return variable
 
-def convertToList(variable):
-    if type(variable) == str and "," in variable:
-        variable = [v.strip() for v in variable.split(",") if v != ""]
-    return variable
+def convertToList(key, value):
+    if key in keys_that_are_lists:
+        value = [v.strip() for v in value.split(",") if v != ""]
+    return value
 
 def consolidateNodeGroups(node_groups):
     node_group_level_vars = ["bgp_as", "platform", "filter", "parent_l3leafs", "uplink_interfaces"]
@@ -90,7 +93,7 @@ def parseL2LeafInfo(inventory_file):
     for row in range(1, l2_defaults_worksheet.nrows):
         k, v = l2_defaults_worksheet.cell_value(row,0), l2_defaults_worksheet.cell_value(row,1)
         if k in configuration_variable_mappers.keys() and v is not None and v != "":
-            v = convertToList(v)
+            v = convertToList(k, v)
             v = convertToBoolIfNeeded(v)
             v = int(v) if type(v) == float else v
             defaults[configuration_variable_mappers[k]] = v
@@ -153,7 +156,7 @@ def parseL3LeafInfo(inventory_file):
     for row in range(1, l3_defaults_worksheet.nrows):
         k, v = l3_defaults_worksheet.cell_value(row,0), l3_defaults_worksheet.cell_value(row,1)
         if k in configuration_variable_mappers.keys() and v is not None and v != "":
-            v = convertToList(v)
+            v = convertToList(k, v)
             v = convertToBoolIfNeeded(v)
             v = int(v) if type(v) == float else v
             defaults[configuration_variable_mappers[k]] = v
@@ -161,7 +164,6 @@ def parseL3LeafInfo(inventory_file):
     # print(json.dumps(defaults, indent=2))
     l3_yaml["defaults"] = defaults
     l3_yaml["node_groups"] = consolidateNodeGroups(node_groups)
-
     return l3_yaml
 
 def parseL3LeafBGPDefaults(inventory_file):
