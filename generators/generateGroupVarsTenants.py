@@ -23,7 +23,7 @@ def generateGroupVarsTenants(inventory_file):
         if tenant_info["VTEP Loopback"] is not None and tenant_info["VTEP Loopback Address Range"] is not None and \
             tenant_info["VTEP Loopback"] != "" and tenant_info["VTEP Loopback Address Range"] != "":
             tenants[tenant_name]["vrfs"][vrf]["vtep_diagnostic"] = {}
-            tenants[tenant_name]["vrfs"][vrf]["vtep_diagnostic"]["loopback"] = tenant_info["VTEP Loopback"]
+            tenants[tenant_name]["vrfs"][vrf]["vtep_diagnostic"]["loopback"] = int(tenant_info["VTEP Loopback"])
             tenants[tenant_name]["vrfs"][vrf]["vtep_diagnostic"]["loopback_ip_range"] = tenant_info["VTEP Loopback Address Range"]
         if "svis" not in tenants[tenant_name]["vrfs"][vrf]:
             tenants[tenant_name]["vrfs"][vrf]["svis"] = {}
