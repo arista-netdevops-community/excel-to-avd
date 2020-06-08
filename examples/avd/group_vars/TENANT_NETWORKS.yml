@@ -49,6 +49,9 @@ tenants:
             - opzone
             vni_override: 50111
         vrf_vni: 10
+        vtep_diagnostic:
+          loopback: loopback100
+          loopback_ip_range: 10.255.1.0/24
       Tenant_A_WAN_Zone:
         svis:
           150:

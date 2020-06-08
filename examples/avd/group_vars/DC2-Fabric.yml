@@ -67,6 +67,8 @@ l2leaf:
       - Ethernet2
 l3leaf:
   defaults:
+    mlag_interfaces:
+    - Ethernet3
     platform: vEOS
     spanning_tree_mode: mstp
     spanning_tree_priority: 16384
@@ -135,8 +137,6 @@ l3leaf:
         - Tenant_A
         - Tenant_B
         - Tenant_C
-      mlag_interfaces:
-      - Ethernet94
       nodes:
         DC1-SVC3A:
           id: 4
