@@ -32,7 +32,7 @@ def main():
         "SPINES": None,
         "L3_LEAFS": None,
         "L2_LEAFS": None,
-        "TENANTS": None,
+        "TENANT_NETWORKS": None,
         "SERVERS": None
         },
     "dc-fabric-deploy-cvp": None,
