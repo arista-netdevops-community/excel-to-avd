@@ -93,7 +93,7 @@ def getFabricInventory(inventory_file):
     fabric_inventory["children"]["SPINES"] = parseSpineInfo(inventory_file)
     fabric_inventory["children"]["L3_LEAFS"] = parseLeafInfo(inventory_file, leaf_type="L3")
     fabric_inventory["children"]["L2_LEAFS"] = parseLeafInfo(inventory_file, leaf_type="L2")
-    fabric_inventory["children"]["vars"] = {
+    fabric_inventory["vars"] = {
         "ansible_connection": "httpapi",
         "ansible_network_os": "eos",
         "ansible_become": "yes",
