@@ -1,0 +1,19 @@
+cvp_ingestauth_key: null
+cvp_instance_ips:
+- 10.20.30.181
+- 10.20.30.182
+- 10.20.30.183
+local_users:
+  admin:
+    privilege: 15
+    role: network-admin
+    sha512_password: hash2
+  cvpadmin:
+    privilege: 15
+    role: network-admin
+    sha512_password: hash1
+mgmt_gateway: 10.20.30.254
+name_servers:
+- 8.8.8.8
+ntp_servers:
+- 1.1.1.1
