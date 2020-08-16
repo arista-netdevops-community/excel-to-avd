@@ -6,14 +6,14 @@ tenants:
         svis:
           130:
             enabled: 1
-            ip_subnet: 10.1.30.1/24
+            ip_address_virtual: 10.1.30.1/24
             name: Tenant_A_APP_Zone_1
             tags:
             - app
             - erp1
           131:
             enabled: 1
-            ip_subnet: 10.1.31.1/24
+            ip_address_virtual: 10.1.31.1/24
             name: Tenant_A_APP_Zone_2
             tags:
             - app
@@ -22,13 +22,13 @@ tenants:
         svis:
           140:
             enabled: 1
-            ip_subnet: 10.1.40.1/24
+            ip_address_virtual: 10.1.40.1/24
             name: Tenant_A_DB_Zone_1
             tags:
             - db
           141:
             enabled: 1
-            ip_subnet: 10.1.41.1/24
+            ip_address_virtual: 10.1.41.1/24
             name: Tenant_A_DB_Zone_2
             tags:
             - db
@@ -37,14 +37,23 @@ tenants:
         svis:
           110:
             enabled: 1
-            ip_subnet: 10.1.10.1/24
+            ip_address_virtual: 10.1.10.1/24
             name: Tenant_A_OP_Zone_1
             tags:
             - opzone
           111:
             enabled: 1
-            ip_subnet: 10.1.11.1/24
+            ip_virtual_router_address: 10.1.11.1/24
             name: Tenant_A_OP_Zone_2
+            nodes:
+              DC1-LEAF2A:
+                ip_address: 10.1.11.4
+              DC1-LEAF2B:
+                ip_address: 10.1.11.5
+              DC1-SVC3A:
+                ip_address: 10.1.11.6
+              DC1-SVC3B:
+                ip_address: 10.1.11.7
             tags:
             - opzone
             vni_override: 50111
@@ -56,7 +65,7 @@ tenants:
         svis:
           150:
             enabled: 1
-            ip_subnet: 10.1.50.1/24
+            ip_address_virtual: 10.1.50.1/24
             name: Tenant_A_WAN_Zone_1
             tags:
             - wan
@@ -65,14 +74,14 @@ tenants:
         svis:
           120:
             enabled: 1
-            ip_subnet: 10.1.20.1/24
+            ip_address_virtual: 10.1.20.1/24
             name: Tenant_A_WEB_Zone_1
             tags:
             - web
             - erp1
           121:
             enabled: 1
-            ip_subnet: 10.1.21.1/24
+            ip_address_virtual: 10.1.21.1/24
             name: Tenant_A_WEB_Zone_2
             tags:
             - web
@@ -84,13 +93,13 @@ tenants:
         svis:
           210:
             enabled: 1
-            ip_subnet: 10.2.10.1/24
+            ip_address_virtual: 10.2.10.1/24
             name: Tenant_B_OP_Zone_1
             tags:
             - opzone
           211:
             enabled: 1
-            ip_subnet: 10.2.11.1/24
+            ip_address_virtual: 10.2.11.1/24
             name: Tenant_B_OP_Zone_2
             tags:
             - opzone
@@ -99,7 +108,7 @@ tenants:
         svis:
           250:
             enabled: 1
-            ip_subnet: 10.2.50.1/24
+            ip_address_virtual: 10.2.50.1/24
             name: Tenant_B_WAN_Zone_1
             tags:
             - wan
@@ -111,7 +120,7 @@ tenants:
         svis:
           310:
             enabled: 1
-            ip_subnet: 10.3.10.1/24
+            ip_address_virtual: 10.3.10.1/24
             name: Tenant_C_OP_Zone_1
             tags:
             - opzone

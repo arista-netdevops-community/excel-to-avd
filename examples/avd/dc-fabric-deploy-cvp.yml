@@ -1,6 +1,6 @@
 ---
 - name: Build Switch configuration
-  hosts: DC2-Fabric
+  hosts: AVD-Demo
   connection: local
   gather_facts: no
   tasks:
@@ -22,7 +22,7 @@
       import_role:
          name: arista.avd.eos_config_deploy_cvp
       vars:
-        container_root: 'DC2-Fabric'
-        configlets_prefix: 'DC2_AVD'
-        device_filter: 'DC2'
+        container_root: 'AVD-Demo'
+        configlets_prefix: 'avd'
+        device_filter: 'avd'
         state: present

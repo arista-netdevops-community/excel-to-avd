@@ -11,12 +11,19 @@ from generators.generateGroupVarsTenants import generateGroupVarsTenants
 from generators.generateGroupVarsServers import generateGroupVarsServers
 
 import argparse
+from getpass import getpass
 
 def main():
     parser = argparse.ArgumentParser(
         description='Creates necessary files to run Arista AVD ansible playbook')
     parser.add_argument('-f', '--file', help="path to Excel file")
     args = parser.parse_args()
+
+    cvpadmin_password = getpass("cvpadmin password: ")
+    # confirm_password = getpass("Confirm cvpadmin password: ")
+    # if cvpadmin_password != confirm_password:
+    #     print("Passwords do not match")
+    #     return
 
     file_location = args.file
     if file_location is None:
@@ -51,7 +58,7 @@ git+https://github.com/batfish/pybatfish.git'''
     avd["inventory"] = generateInventory(file_location)
     avd["dc-fabric-deploy-cvp"] = generateCVPDeploymentPlaybook(file_location)
     avd["group_vars"]["all"] = generateGroupVarsAll(file_location)
-    avd["group_vars"]["CVP"] = generateGroupVarsCVP(file_location)
+    avd["group_vars"]["CVP"] = generateGroupVarsCVP(file_location, cvpadmin_password)
     avd["group_vars"][fabric_name] = generateGroupVarsFabric(file_location)
     avd["group_vars"]["SPINES"] = generateGroupVarsSpines(file_location)
     avd["group_vars"]["L3_LEAFS"] = generateGroupVarsL3Leafs(file_location)
@@ -119,9 +126,6 @@ git+https://github.com/batfish/pybatfish.git'''
         reqs.write(avd["requirements"])
 
     #Create dc-fabric-post-validation.yml
-
-
-
 
 
 if __name__ == "__main__":

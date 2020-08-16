@@ -1,11 +1,6 @@
 all:
   children:
-    CVP:
-      hosts:
-        cvp_primary:
-          ansible_host: 10.20.30.181
-          ansible_httpapi_host: 10.20.30.181
-    DC2-Fabric:
+    AVD-Demo:
       children:
         L2_LEAFS:
           children:
@@ -43,13 +38,18 @@ all:
               ansible_host: 192.168.200.101
             DC1-SPINE2:
               ansible_host: 192.168.200.102
-        vars:
-          ansible_become: 'yes'
-          ansible_become_method: enable
-          ansible_connection: httpapi
-          ansible_httpapi_use_ssl: true
-          ansible_httpapi_validate_certs: false
-          ansible_network_os: eos
+      vars:
+        ansible_become: 'yes'
+        ansible_become_method: enable
+        ansible_connection: httpapi
+        ansible_httpapi_use_ssl: true
+        ansible_httpapi_validate_certs: false
+        ansible_network_os: eos
+    CVP:
+      hosts:
+        cvp_primary:
+          ansible_host: 10.20.30.181
+          ansible_httpapi_host: 10.20.30.181
     SERVERS:
       children:
         L2_LEAFS: null

@@ -77,8 +77,12 @@ def parseLeafInfo(inventory_file, leaf_type="L3"):
             node_groups[leaf_info["Container Name"]] = {"hosts": {hostname: node_details}}
         else:
             node_groups[leaf_info["Container Name"]]["hosts"][hostname] = node_details
-    leafs["children"] = node_groups
-    return leafs
+
+    if len(node_groups) > 0: 
+        leafs["children"] = node_groups
+        return leafs
+    else:
+        return None
 
 def getServers():
     servers = {"children": {"L3_LEAFS": None, "L2_LEAFS": None}}
@@ -91,8 +95,10 @@ def getTenantNetworks():
 def getFabricInventory(inventory_file):
     fabric_inventory = {"children":{}}
     fabric_inventory["children"]["SPINES"] = parseSpineInfo(inventory_file)
-    fabric_inventory["children"]["L3_LEAFS"] = parseLeafInfo(inventory_file, leaf_type="L3")
-    fabric_inventory["children"]["L2_LEAFS"] = parseLeafInfo(inventory_file, leaf_type="L2")
+    if parseLeafInfo(inventory_file, leaf_type="L3") != None:
+        fabric_inventory["children"]["L3_LEAFS"] = parseLeafInfo(inventory_file, leaf_type="L3")
+    if parseLeafInfo(inventory_file, leaf_type="L2") != None:
+        fabric_inventory["children"]["L2_LEAFS"] = parseLeafInfo(inventory_file, leaf_type="L2")
     fabric_inventory["vars"] = {
         "ansible_connection": "httpapi",
         "ansible_network_os": "eos",

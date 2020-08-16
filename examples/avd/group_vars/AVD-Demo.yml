@@ -9,7 +9,7 @@ bgp_peer_groups:
     password: null
   MLAG_IPv4_UNDERLAY_PEER:
     password: null
-fabric_name: DC2-Fabric
+fabric_name: AVD-Demo
 l2leaf:
   defaults:
     platform: vEOS
