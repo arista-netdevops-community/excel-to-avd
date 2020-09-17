@@ -16,4 +16,3 @@ This script allows users to create the necessary files in order to set up and ru
 
 ## Limitations
 - There is currently no support for pre-validation or post-validation
-
