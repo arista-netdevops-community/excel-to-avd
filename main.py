@@ -69,17 +69,18 @@ git+https://github.com/batfish/pybatfish.git'''
     #Create avd directory
     if not os.path.exists("./avd"):
         os.mkdir("./avd")
+        os.mkdir("./avd/collections")
 
     #Install ansible collections if necessary
-    if not os.path.exists("./avd/ansible_collections/arista/avd"):
+    if not os.path.exists("./avd/collections/ansible_collections/arista/avd"):
         print("Installing arista.avd collection")
-        process = subprocess.Popen(['ansible-galaxy', 'collection', 'install', 'arista.avd', '-p', './avd/'],
+        process = subprocess.Popen(['ansible-galaxy', 'collection', 'install', 'arista.avd', '-p', './avd/collections'],
                      stdout=subprocess.PIPE, 
                      stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
-    if not os.path.exists("./avd/ansible_collections/arista/cvp"):
+    if not os.path.exists("./avd/collections/ansible_collections/arista/cvp"):
         print("Installing arista.cvp collection")
-        process = subprocess.Popen(['ansible-galaxy', 'collection', 'install', 'arista.cvp',  '-p', './avd/'],
+        process = subprocess.Popen(['ansible-galaxy', 'collection', 'install', 'arista.cvp',  '-p', './avd/collections'],
                      stdout=subprocess.PIPE, 
                      stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
