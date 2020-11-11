@@ -54,7 +54,8 @@ treelib==1.5.5
 pytest==5.3.4
 pytest-html
 ward==0.34.0b0
-git+https://github.com/batfish/pybatfish.git'''
+git+https://github.com/batfish/pybatfish.git
+cvprac==1.0.4'''
     avd["inventory"] = generateInventory(file_location)
     avd["dc-fabric-deploy-cvp"] = generateCVPDeploymentPlaybook(file_location)
     avd["group_vars"]["all"] = generateGroupVarsAll(file_location)
@@ -126,8 +127,13 @@ git+https://github.com/batfish/pybatfish.git'''
     with open("./avd/requirements.txt", "w") as reqs:
         reqs.write(avd["requirements"])
 
-    #Create dc-fabric-post-validation.yml
+    #Install requirements
+    process = subprocess.Popen(['pip', 'install', '-r', './avd/requirements.txt'],
+                     stdout=subprocess.PIPE, 
+                     stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
 
+    #Create dc-fabric-post-validation.yml
 
 if __name__ == "__main__":
     main()
