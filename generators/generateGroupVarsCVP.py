@@ -8,7 +8,7 @@ def generateGroupVarsCVP(inventory_file, cvpadmin_password):
         "ansible_password": cvpadmin_password,
         "ansible_network_os": "eos",
         "ansible_httpapi_port": 443,
-        "ansible_python_interpreter": "$(which python)"
+        "ansible_python_interpreter": "$(which python3)"
     }
     return variables
 
